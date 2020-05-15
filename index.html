@@ -35,20 +35,50 @@
                 border-radius: 3px;
                 z-index: 800;
             }
+.btn {
+    position: fixed;
+                margin-top: 0;
+                top: 80px;
+                left: 55px;
+                font-size: 1em;
+                font-family: "Lora", serif;
+                letter-spacing: .04em;
+                padding: 5px;
+                background-color: rgba(255, 255, 255, .7);
+                border: 1px solid grey;
+                border-radius: 8px;
+                z-index: 800;
+                width:130px
+}
+.Butterfly {color: black;
+            top: 75px;
+            left: 65px;}
+.YauOi {color: black;
+            top: 75px;
+            left: 205px;}
+.LongPing{color: black;
+            top: 110px;
+            left: 65px;}
+
+
 </style>
 
 </head>
 <body>
     <h1 id="title">Estate PhotoView</h1>
+    <button class="btn LongPing" onclick="zoomtopoint(LongPingEstatePoint,estate_zoomlevel,map)">Longping Estate</button>
+    <button class="btn Butterfly" onclick="zoomtopoint(ButterflyEstatePoint,17,map)">Butterfly Estate</button>
+    <button class="btn YauOi" onclick="zoomtopoint(YauOiEstatePoint,17,map)">YauOi Estate</button>
 <div id='map'></div>
 
-<script>
-var url = "Butterfly.geojson";
-var url_points='Longping.geojson'
-var icon='files/cam_green.png'
 
-var centrepoint=[22.448580, 114.023275]
-var map = L.map('map').setView(centrepoint, 16);
+<script>
+var url = "Planter.geojson";
+var url_points='photo_updated.geojson'
+var icon='files/cam_blue.png'
+
+var defaultcentrepoint=[22.448580, 114.023275]
+var map = L.map('map').setView(defaultcentrepoint, 16);
 
 var osm=new L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{ 
 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
@@ -65,10 +95,18 @@ var photoIcon=L.icon({
     popupAnchor:[0,0]
 
 })
+//zoom to finction
+var estate_zoomlevel=16
+var ButterflyEstatePoint=[22.376210, 113.963798]
+var LongPingEstatePoint=[22.448580, 114.023275]
+var YauOiEstatePoint=[22.387733, 113.975869]
+function zoomtopoint(point,zoomlevel,map){
+    map.setView(point,zoomlevel)
+}
 // popup activity
 function forEachFeature(feature, layer) {
 
-	var popupContent = '<img src="ThumbPhoto/LongPingEstate/'+feature.properties.Name+'" >'
+	var popupContent = '<img src="ThumbPhoto/'+feature.properties.Image+'" >'
 
 	layer.bindPopup(popupContent);
 };
@@ -82,9 +120,10 @@ function PolygonforEachFeature(feature, layer) {
 
 var polygonstyle={
     'color':'green',
-    'fillcolor':'green',
-    'weight':5,
-    'opacity':1
+    //'fillcolor':'green',
+    'weight':1.5,
+    'opacity':0.7,
+
 }
 ///geojson process
 var greenspace = L.geoJSON(null, {
@@ -111,7 +150,7 @@ greenspace.addData(data);
 });
 
 
-greenspace.addTo(map);
+//greenspace.addTo(map);
 
 $.getJSON(url_points, function(data) {
 photos.addData(data);
