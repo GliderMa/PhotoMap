@@ -16,15 +16,30 @@
 
 <style>
 #map {
-width: 1200px;
-height: 540px;
+    position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
 }
+#title {
+                position: fixed;
+                margin-top: 0;
+                top: 10px;
+                left: 55px;
+                font-size: 2em;
+                font-family: "Lora", serif;
+                letter-spacing: .04em;
+                padding: 10px 15px;
+                background-color: rgba(255, 255, 255, .5);
+                border: 1px solid grey;
+                border-radius: 3px;
+                z-index: 800;
+            }
 </style>
 
 </head>
 <body>
-    <h4>
-        <center>TuenMun Estates PhotoView</center>
+    <h1 id="title">Estate PhotoView</h1>
 <div id='map'></div>
 
 <script>
