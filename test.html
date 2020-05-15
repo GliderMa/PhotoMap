@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Request JSON Test</title>
+  </head>
+  <body>
+    <a href="#" id="get-data">Get JSON data</a>
+    <div id="show-data"></div>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        
+        ]
+        $.ajax({
+            url:'photo.json',
+            dataType:'json',
+            type:'get',
+            cache:false,
+            success:function(data){
+                
+                /*
+                $(data).each(function(index,value){
+                    console.log(value.Lat,value.Lon)
+                    
+                })
+                */
+            }
+        })
+        
+        
+        var obj=JSON.parse('photo.json')
+        console.log(obj)
+
+
+
+
+    </script>
+  </body>
+</html>

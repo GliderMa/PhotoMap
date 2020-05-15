@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+
+
+<style>
+#map {
+width: 1200px;
+height: 540px;
+}
+</style>
+
+</head>
+<body>
+    <h4>
+        <center>TuenMun Estates PhotoView</center>
+<div id='map'></div>
+
+<script>
+var url = "Butterfly.geojson";
+var url_points='Longping.geojson'
+var icon='files/cam_green.png'
+
+var centrepoint=[22.389111, 113.975131]
+var map = L.map('map').setView(centrepoint, 16);
+
+var osm=new L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{ 
+attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+
+//var base = new L.StamenTileLayer("watercolor").addTo(map);
+//Check out http://maps.stamen.com/#watercolor/12/37.7706/-122.3782
+
+//////////////////////////
+
+var photoIcon=L.icon({
+    iconUrl:icon,
+    iconSize:[16,16],
+    iconAnchor:[0,0],
+    popupAnchor:[0,0]
+
+})
+// popup activity
+function forEachFeature(feature, layer) {
+
+	var popupContent = '<img src="ThumbPhoto/LongPingEstate/'+feature.properties.Name+'" >'
+
+	layer.bindPopup(popupContent);
+};
+
+function PolygonforEachFeature(feature, layer) {
+
+    var popupContent = feature.properties.EstateName
+
+    layer.bindPopup(popupContent);
+};
+
+var polygonstyle={
+    'color':'green',
+    'fillcolor':'green',
+    'weight':5,
+    'opacity':1
+}
+///geojson process
+var greenspace = L.geoJSON(null, {
+	style: polygonstyle,
+    onEachFeature:PolygonforEachFeature
+		
+});
+var photos = L.geoJSON(null, {
+	onEachFeature: forEachFeature, 
+	
+
+
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {icon:photoIcon
+
+
+		});
+
+	}
+});
+// Get GeoJSON data and create features.
+$.getJSON(url, function(data) {
+greenspace.addData(data);
+});
+
+
+greenspace.addTo(map);
+
+$.getJSON(url_points, function(data) {
+photos.addData(data);
+});
+
+
+photos.addTo(map);
+/////////////////////////////////////////
+
+
+// Get GeoJSON data and create features.
+
+
+// layer control
+var baseMaps= {
+	"Open Street Map":osm,	
+	}
+
+
+var overlay= {
+	"Observation Points": photos,
+    "Greenspace":greenspace
+	}
+
+L.control.layers(baseMaps, overlay).addTo(map);  
+// END layer control
+
+//scalebar
+L.control.scale().addTo(map);
+
+</script>
+</body>
+</html>
