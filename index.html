@@ -66,7 +66,7 @@
 </head>
 <body>
     <h1 id="title">Estate PhotoView</h1>
-    <button class="btn LongPing" onclick="zoomtopoint(LongPingEstatePoint,estate_zoomlevel,map)">Longping Estate</button>
+    <button class="btn LongPing" onclick="zoomtopoint(LongPingEstatePoint,estate_zoomlevel,map)">LongPing Estate</button>
     <button class="btn Butterfly" onclick="zoomtopoint(ButterflyEstatePoint,17,map)">Butterfly Estate</button>
     <button class="btn YauOi" onclick="zoomtopoint(YauOiEstatePoint,17,map)">YauOi Estate</button>
 <div id='map'></div>
@@ -76,7 +76,7 @@
 var url = "Planter.geojson";
 var url_points='photo_updated.geojson'
 var icon='files/cam_blue.png'
-
+// initialize map
 var defaultcentrepoint=[22.448580, 114.023275]
 var map = L.map('map').setView(defaultcentrepoint, 16);
 
@@ -86,7 +86,7 @@ attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contri
 //var base = new L.StamenTileLayer("watercolor").addTo(map);
 //Check out http://maps.stamen.com/#watercolor/12/37.7706/-122.3782
 
-//////////////////////////
+//photo ico settings
 
 var photoIcon=L.icon({
     iconUrl:icon,
@@ -95,7 +95,7 @@ var photoIcon=L.icon({
     popupAnchor:[0,0]
 
 })
-//zoom to finction
+//zoom to function
 var estate_zoomlevel=16
 var ButterflyEstatePoint=[22.376210, 113.963798]
 var LongPingEstatePoint=[22.448580, 114.023275]
