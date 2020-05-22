@@ -86,9 +86,11 @@
 <script>
 var url = "Planter.geojson";
 var url_points='photo_updated.geojson'
+var panorama_url="panorama.geojson"
 var icon='files/cam_blue.png'
+var panorama_icon='files/panorama.png'
 // initialize map
-var defaultcentrepoint=[22.448580, 114.023275]
+var defaultcentrepoint=[22.372547, 114.126945]
 var map = L.map('map').setView(defaultcentrepoint, 16);
 
 var osm=new L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{ 
@@ -106,6 +108,13 @@ var photoIcon=L.icon({
     popupAnchor:[0,0]
 
 })
+
+var panoramaIcon=L.icon({
+    iconUrl:panorama_icon,
+    iconSize:[30,22],
+    iconAnchor:[0,0],
+    popupAnchor:[-250,0]
+})
 //zoom to function
 var estate_zoomlevel=16
 var ButterflyEstatePoint=[22.376210, 113.963798]
@@ -117,14 +126,21 @@ var ShunTinEstatePoint=[22.325563, 114.226497]
 function zoomtopoint(point,zoomlevel,map){
     map.setView(point,zoomlevel)
 }
-// popup activity
+// points popup image activity
 function forEachFeature(feature, layer) {
 
 	var popupContent = '<img src="ThumbPhoto/'+feature.properties.Image+'" >'
 
 	layer.bindPopup(popupContent);
 };
+// panorama popup
+function forEachPanoramaFeature(feature, layer) {
 
+var popupContent = '<img src="PanoramaPhoto/'+feature.properties.Image+'" >'
+
+layer.bindPopup(popupContent);
+};
+// polygon popup estatename
 function PolygonforEachFeature(feature, layer) {
 
     var popupContent = feature.properties.EstateName
@@ -147,15 +163,16 @@ var greenspace = L.geoJSON(null, {
 });
 var photos = L.geoJSON(null, {
 	onEachFeature: forEachFeature, 
-	
-
-
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {icon:photoIcon
-
-
 		});
-
+	}
+});
+var panorama=L.geoJSON(null,{
+    onEachFeature:forEachPanoramaFeature,
+    pointToLayer:function (feature, latlng) {
+		return L.marker(latlng, {icon:panoramaIcon
+		});
 	}
 });
 // Get GeoJSON data and create features.
@@ -164,14 +181,18 @@ greenspace.addData(data);
 });
 
 
-//greenspace.addTo(map);
-
 $.getJSON(url_points, function(data) {
 photos.addData(data);
 });
 
+$.getJSON(panorama_url, function(data) {
+panorama.addData(data);
+});
+// set initial display layer
 
+panorama.addTo(map);
 photos.addTo(map);
+
 /////////////////////////////////////////
 
 
@@ -186,6 +207,7 @@ var baseMaps= {
 
 var overlay= {
 	"Observation Points": photos,
+    "PanoramaView":panorama,
     "Greenspace":greenspace
 	}
 
