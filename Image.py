@@ -1,3 +1,6 @@
+'''
+extract EXIF infomation, record it in csv, and make thumb photos
+'''
 from PIL import Image
 from PIL.ExifTags import TAGS
 from PIL.ExifTags import GPSTAGS
@@ -41,11 +44,29 @@ def get_coordinates(geotags):
     lon = get_decimal_from_dms(geotags['GPSLongitude'], geotags['GPSLongitudeRef'])
 
     return lat,lon
-df=pd.DataFrame(columns=['Name','Lat','Lon'])
+
+def make_thumbnail(folderpath,savepath,filename):
+    imagepath=folderpath+filename
+    img = Image.open(imagepath)
+
+    (width, height) = img.size
+    if width > height:
+        ratio = 450 / width
+    else:
+        ratio = 450 / height
+
+    img.thumbnail((round(width * ratio), round(height * ratio)), Image.LANCZOS)
+    img.save(savepath+ filename)
+#df=pd.DataFrame(columns=['Name','Lat','Lon'])
+
 csvpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated.csv'
-pathcollection=['D:\HK B\SiteVisitPlanPreparation\Butterfly/',
-      'D:\HK B\SiteVisitPlanPreparation\YAUOI\YauOiPhoto\Yau OI/',
-      'D:\HK B\SiteVisitPlanPreparation\LongPing\LongPingPhotos\Estate Photo/']
+exportpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated0522.csv'
+pathcollection=['D:\HK B\SiteVisitPlanPreparation\Ap Lei Chau\Ap Lei Chau/',
+      'D:\HK B\SiteVisitPlanPreparation\TsuenWan\TsuenWan/',
+      'D:\HK B\SiteVisitPlanPreparation\ShunTinEstate\ShunTinEstate/']
+thumbphotopath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\ThumbPhoto/'
+
+df=pd.read_csv(csvpath)
 for path in pathcollection:
     photolist=os.listdir(path)
 
@@ -57,7 +78,8 @@ for path in pathcollection:
 
     for name in photolist:
         try:
-
+            make_thumbnail(path, thumbphotopath, name)
+            # make thumbnail
             filepath=path+name
             #print(filepath)
             exif = get_exif(filepath)
@@ -70,4 +92,4 @@ for path in pathcollection:
         except:
             print(name+' error')
 
-    df.to_csv(csvpath,index=None)
+    df.to_csv(exportpath,index=None)

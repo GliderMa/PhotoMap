@@ -46,20 +46,28 @@
                 padding: 5px;
                 background-color: rgba(255, 255, 255, .7);
                 border: 1px solid grey;
-                border-radius: 8px;
+                border-radius: 5px;
                 z-index: 800;
-                width:130px
+                width:140px
 }
 .Butterfly {color: black;
             top: 75px;
-            left: 65px;}
+            left: 55px;}
 .YauOi {color: black;
             top: 75px;
             left: 205px;}
 .LongPing{color: black;
             top: 110px;
-            left: 65px;}
-
+            left: 55px;}
+.ApLeiChau{color: black;
+            top: 110px;
+            left: 205px;}
+.TsuenWan{color: black;
+            top: 145px;
+            left: 55px;}
+.ShunTin{color: black;
+            top: 145px;
+            left: 205px;}
 
 </style>
 
@@ -69,6 +77,9 @@
     <button class="btn LongPing" onclick="zoomtopoint(LongPingEstatePoint,estate_zoomlevel,map)">LongPing Estate</button>
     <button class="btn Butterfly" onclick="zoomtopoint(ButterflyEstatePoint,17,map)">Butterfly Estate</button>
     <button class="btn YauOi" onclick="zoomtopoint(YauOiEstatePoint,17,map)">YauOi Estate</button>
+    <button class="btn ApLeiChau" onclick="zoomtopoint(ApLeiChauEstatePoint,18,map)">ApLeiChau Estate</button>
+    <button class="btn TsuenWan" onclick="zoomtopoint(TaiWoHauEstatePoint,16,map)">TaiWoHau Estate</button>
+    <button class="btn ShunTin" onclick="zoomtopoint(ShunTinEstatePoint,17,map)">ShunTin Estate</button>
 <div id='map'></div>
 
 
@@ -100,6 +111,9 @@ var estate_zoomlevel=16
 var ButterflyEstatePoint=[22.376210, 113.963798]
 var LongPingEstatePoint=[22.448580, 114.023275]
 var YauOiEstatePoint=[22.387733, 113.975869]
+var ApLeiChauEstatePoint=[22.244551, 114.150515]
+var TaiWoHauEstatePoint=[22.372547, 114.126945]
+var ShunTinEstatePoint=[22.325563, 114.226497]
 function zoomtopoint(point,zoomlevel,map){
     map.setView(point,zoomlevel)
 }
