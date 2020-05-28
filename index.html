@@ -68,6 +68,9 @@
 .ShunTin{color: black;
             top: 145px;
             left: 205px;}
+.LokFu{color: black;
+            top: 180px;
+            left: 55px;}
 
 </style>
 
@@ -80,6 +83,7 @@
     <button class="btn ApLeiChau" onclick="zoomtopoint(ApLeiChauEstatePoint,18,map)">ApLeiChau Estate</button>
     <button class="btn TsuenWan" onclick="zoomtopoint(TaiWoHauEstatePoint,16,map)">TaiWoHau Estate</button>
     <button class="btn ShunTin" onclick="zoomtopoint(ShunTinEstatePoint,17,map)">ShunTin Estate</button>
+    <button class="btn LokFu" onclick="zoomtopoint(LokFuEstatePoint,16,map)">LokFu Estate</button>
 <div id='map'></div>
 
 
@@ -90,7 +94,7 @@ var panorama_url="panorama.geojson"
 var icon='files/cam_blue.png'
 var panorama_icon='files/panorama.png'
 // initialize map
-var defaultcentrepoint=[22.372547, 114.126945]
+var defaultcentrepoint=[22.340687, 114.191012];
 var map = L.map('map').setView(defaultcentrepoint, 16);
 
 var osm=new L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{ 
@@ -123,6 +127,7 @@ var YauOiEstatePoint=[22.387733, 113.975869]
 var ApLeiChauEstatePoint=[22.244551, 114.150515]
 var TaiWoHauEstatePoint=[22.372547, 114.126945]
 var ShunTinEstatePoint=[22.325563, 114.226497]
+var LokFuEstatePoint=[22.340687, 114.191012]
 function zoomtopoint(point,zoomlevel,map){
     map.setView(point,zoomlevel)
 }
@@ -206,8 +211,8 @@ var baseMaps= {
 
 
 var overlay= {
-	"Observation Points": photos,
     "PanoramaView":panorama,
+	"Observation Points": photos,
     "Greenspace":greenspace
 	}
 

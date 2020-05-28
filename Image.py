@@ -1,11 +1,12 @@
 '''
-extract EXIF infomation, record it in csv, and make thumb photos
+extract EXIF infomation, record it in csv,generate geojson file, and make thumb photos
 '''
 from PIL import Image
 from PIL.ExifTags import TAGS
 from PIL.ExifTags import GPSTAGS
 import os
 import pandas as pd
+from geojson import Feature, FeatureCollection, Point
 def get_exif(filename):
     image = Image.open(filename)
     image.verify()
@@ -44,7 +45,28 @@ def get_coordinates(geotags):
     lon = get_decimal_from_dms(geotags['GPSLongitude'], geotags['GPSLongitudeRef'])
 
     return lat,lon
+def dataframe_to_geojson(df,geojsonpath):
+    features=[]
+    for i in range(0,len(df),1):
+        try:
 
+            latitude=df.at[i,'Lat']
+            longitude=df.at[i,'Lon']
+            #print ('mark', latitude,longitude)
+            features.append(
+                Feature(
+                    geometry = Point((longitude, latitude)),
+                    properties = {
+                        'Image': df.at[i,'Name'],
+                        #'Imagepath': Imagepath
+                }
+            )
+        )
+        except:
+            print(df.at[i,'Name']+ ' error')
+    collection = FeatureCollection(features)
+    with open(geojsonpath, "w") as f:
+        f.write('%s' % collection)
 def make_thumbnail(folderpath,savepath,filename):
     imagepath=folderpath+filename
     img = Image.open(imagepath)
@@ -59,13 +81,15 @@ def make_thumbnail(folderpath,savepath,filename):
     img.save(savepath+ filename)
 #df=pd.DataFrame(columns=['Name','Lat','Lon'])
 
-csvpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated.csv'
-exportpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated0522.csv'
-pathcollection=['D:\HK B\SiteVisitPlanPreparation\Ap Lei Chau\Ap Lei Chau/',
-      'D:\HK B\SiteVisitPlanPreparation\TsuenWan\TsuenWan/',
-      'D:\HK B\SiteVisitPlanPreparation\ShunTinEstate\ShunTinEstate/']
+csvpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated0522.csv'
+exportpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated.csv'
+pathcollection=[
+    'D:\HK B\SiteVisitPlanPreparation\WongTaiSin\WongTaiSin\WongTaiSin/',
+     # 'D:\HK B\SiteVisitPlanPreparation\TsuenWan\TsuenWan/',
+     # 'D:\HK B\SiteVisitPlanPreparation\ShunTinEstate\ShunTinEstate/'
+                ]
 thumbphotopath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\ThumbPhoto/'
-
+geojsonpath='photo_updated.geojson'
 df=pd.read_csv(csvpath)
 for path in pathcollection:
     photolist=os.listdir(path)
@@ -93,3 +117,4 @@ for path in pathcollection:
             print(name+' error')
 
     df.to_csv(exportpath,index=None)
+    dataframe_to_geojson(df, geojsonpath)

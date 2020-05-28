@@ -1,3 +1,7 @@
+'''
+extract xy infomation from file name, generate geojson file, and make thumb photos
+'''
+
 import os
 import pandas as pd
 from geojson import Feature, FeatureCollection, Point
