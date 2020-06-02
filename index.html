@@ -25,16 +25,32 @@
                 position: fixed;
                 margin-top: 0;
                 top: 10px;
-                left: 55px;
+                left: 35px;
                 font-size: 2em;
                 font-family: "Lora", serif;
                 letter-spacing: .04em;
                 padding: 10px 15px;
-                background-color: rgba(255, 255, 255, .5);
+                background-color: rgba(255, 255, 255, 0.5);
                 border: 1px solid grey;
                 border-radius: 3px;
                 z-index: 800;
             }
+#background{
+    position: fixed;
+                margin-top: 0;
+                top: 3px;
+                left: 25px;
+                font-size: 2em;
+                font-family: "Lora", serif;
+                letter-spacing: .04em;
+                padding: 10px 15px;
+                background-color: rgba(255, 255, 255, .75);
+                border: 1px solid grey;
+                border-radius: 5px;
+                z-index: 800;
+                width:280px;
+                height:280px ;
+}
 .btn {
     position: fixed;
     color: black;
@@ -52,32 +68,39 @@
                 width:140px
 }
 .Butterfly {top: 75px;
-            left: 55px;}
+            left: 35px;}
 .YauOi {    top: 75px;
-            left: 205px;}
+            left: 185px;}
 .LongPing{  top: 110px;
-            left: 55px;}
+            left: 35px;}
 .ApLeiChau{ top: 110px;
-            left: 205px;}
+            left: 185px;}
 .TsuenWan{  top: 145px;
-            left: 55px;}
+            left: 35px;}
 .ShunTin{   top: 145px;
-            left: 205px;}
+            left: 185px;}
 .LokFu{     top: 180px;
-            left: 55px;}
+            left: 35px;}
 .ChoiYuen{  top: 180px;
-            left: 205px;}
+            left: 185px;}
 .KwongFuk{  top: 215px;
-            left: 55px;}
+            left: 35px;}
 .LaiKok{  top: 215px;
-            left: 205px;}
+            left: 185px;}
 .TaiHangTung{  top: 250px;
-            left: 55px;}                        
+            left: 35px;}
+/*customize Leaflet style */
+.popupCustom .leaflet-popup-tip,
+.popupCustom .leaflet-popup-content-wrapper{
+    background-color: rgba(255, 255, 255, 1)
+}                  
 </style>
 
 </head>
 <body>
+    <h1 id="background"> </h1>
     <h1 id="title">Estate PhotoView</h1>
+   
     <button class="btn LongPing" onclick="zoomtopoint(LongPingEstatePoint,estate_zoomlevel,map)">LongPing Estate</button>
     <button class="btn Butterfly" onclick="zoomtopoint(ButterflyEstatePoint,17,map)">Butterfly Estate</button>
     <button class="btn YauOi" onclick="zoomtopoint(YauOiEstatePoint,17,map)">YauOi Estate</button>
@@ -100,14 +123,14 @@ var icon='files/cam_blue.png'
 var panorama_icon='files/panorama.png'
 // initialize map
 var defaultcentrepoint=[22.340687, 114.191012];
-var map = L.map('map').setView(defaultcentrepoint, 16);
+var map = L.map('map',{zoomControl:false}).setView(defaultcentrepoint, 16);
 
 var osm=new L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{ 
 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 
 //var base = new L.StamenTileLayer("watercolor").addTo(map);
 //Check out http://maps.stamen.com/#watercolor/12/37.7706/-122.3782
-
+var popup=L.popup({maxWidth:null});
 //photo ico settings
 
 var photoIcon=L.icon({
@@ -122,7 +145,7 @@ var panoramaIcon=L.icon({
     iconUrl:panorama_icon,
     iconSize:[30,22],
     iconAnchor:[0,0],
-    popupAnchor:[-250,0]
+    popupAnchor:[0,0]
 })
 //zoom to function
 var estate_zoomlevel=16
@@ -140,19 +163,37 @@ var TaiHangTungEstatePoint=[22.331597, 114.170848]
 function zoomtopoint(point,zoomlevel,map){
     map.setView(point,zoomlevel)
 }
+//custom popup options
+var customOptions=
+    {
+    'maxWidth':'1020',
+    'className':'popupCustom'
+    }
+/////////////////////////////////////////////////////////////////////
+
+document.querySelector(".leaflet-popup-pane").addEventListener("load", function (event) {
+  var tagName = event.target.tagName,
+      popup = map._popup; // Currently open popup, if any.
+
+  if (tagName === "IMG" && popup) {
+    popup.update();
+  }
+}, true); // Capture the load event, because it does not bubble.
+
 // points popup image activity
 function forEachFeature(feature, layer) {
 
 	var popupContent = '<img src="ThumbPhoto/'+feature.properties.Image+'" >'
+    popupContent.onload=function(){layer.openPopup();};
 
-	layer.bindPopup(popupContent);
+	layer.bindPopup(popupContent,customOptions);
 };
 // panorama popup
 function forEachPanoramaFeature(feature, layer) {
 
 var popupContent = '<img src="PanoramaPhoto/'+feature.properties.Image+'" >'
 
-layer.bindPopup(popupContent);
+layer.bindPopup(popupContent,customOptions);
 };
 // polygon popup estatename
 function PolygonforEachFeature(feature, layer) {
@@ -213,7 +254,7 @@ photos.addTo(map);
 // Get GeoJSON data and create features.
 
 
-// layer control
+// layer control #add layer control button
 var baseMaps= {
 	"Open Street Map":osm,	
 	}
@@ -230,6 +271,7 @@ L.control.layers(baseMaps, overlay).addTo(map);
 
 //scalebar
 L.control.scale().addTo(map);
+L.control.zoom({position:'bottomright'}).addTo(map)
 
 </script>
 </body>
