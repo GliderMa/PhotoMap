@@ -37,6 +37,7 @@
             }
 .btn {
     position: fixed;
+    color: black;
                 margin-top: 0;
                 top: 80px;
                 left: 55px;
@@ -50,28 +51,28 @@
                 z-index: 800;
                 width:140px
 }
-.Butterfly {color: black;
-            top: 75px;
+.Butterfly {top: 75px;
             left: 55px;}
-.YauOi {color: black;
-            top: 75px;
+.YauOi {    top: 75px;
             left: 205px;}
-.LongPing{color: black;
-            top: 110px;
+.LongPing{  top: 110px;
             left: 55px;}
-.ApLeiChau{color: black;
-            top: 110px;
+.ApLeiChau{ top: 110px;
             left: 205px;}
-.TsuenWan{color: black;
-            top: 145px;
+.TsuenWan{  top: 145px;
             left: 55px;}
-.ShunTin{color: black;
-            top: 145px;
+.ShunTin{   top: 145px;
             left: 205px;}
-.LokFu{color: black;
-            top: 180px;
+.LokFu{     top: 180px;
             left: 55px;}
-
+.ChoiYuen{  top: 180px;
+            left: 205px;}
+.KwongFuk{  top: 215px;
+            left: 55px;}
+.LaiKok{  top: 215px;
+            left: 205px;}
+.TaiHangTung{  top: 250px;
+            left: 55px;}                        
 </style>
 
 </head>
@@ -84,6 +85,10 @@
     <button class="btn TsuenWan" onclick="zoomtopoint(TaiWoHauEstatePoint,16,map)">TaiWoHau Estate</button>
     <button class="btn ShunTin" onclick="zoomtopoint(ShunTinEstatePoint,17,map)">ShunTin Estate</button>
     <button class="btn LokFu" onclick="zoomtopoint(LokFuEstatePoint,16,map)">LokFu Estate</button>
+    <button class="btn ChoiYuen" onclick="zoomtopoint(ChoiYuenEstatePoint,17,map)">ChoiYuen Estate</button>
+    <button class="btn KwongFuk" onclick="zoomtopoint(KwongFukEstatePoint,17,map)">KwongFuk Estate</button>
+    <button class="btn LaiKok" onclick="zoomtopoint(LaiKokEstatePoint,17,map)">LaiKok Estate</button>
+    <button class="btn TaiHangTung" onclick="zoomtopoint(TaiHangTungEstatePoint,17,map)">TaiHangTung Estate</button>
 <div id='map'></div>
 
 
@@ -128,6 +133,10 @@ var ApLeiChauEstatePoint=[22.244551, 114.150515]
 var TaiWoHauEstatePoint=[22.372547, 114.126945]
 var ShunTinEstatePoint=[22.325563, 114.226497]
 var LokFuEstatePoint=[22.340687, 114.191012]
+var ChoiYuenEstatePoint=[22.501032, 114.125711]
+var KwongFukEstatePoint=[22.448089, 114.173833]
+var LaiKokEstatePoint=[22.332580, 114.157471]
+var TaiHangTungEstatePoint=[22.331597, 114.170848]
 function zoomtopoint(point,zoomlevel,map){
     map.setView(point,zoomlevel)
 }
@@ -181,12 +190,12 @@ var panorama=L.geoJSON(null,{
 	}
 });
 // Get GeoJSON data and create features.
-$.getJSON(url, function(data) {
+jQuery.getJSON(url, function(data) {
 greenspace.addData(data);
 });
 
 
-$.getJSON(url_points, function(data) {
+jQuery.getJSON(url_points, function(data) {
 photos.addData(data);
 });
 

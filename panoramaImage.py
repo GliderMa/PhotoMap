@@ -1,11 +1,23 @@
 '''
 extract xy infomation from file name, generate geojson file, and make thumb photos
 '''
-
-import os
 import pandas as pd
 from geojson import Feature, FeatureCollection, Point
+from PIL import Image
+import os
 
+def make_thumbnail(folderpath,savepath,filename,size):
+    imagepath=folderpath+filename
+    img = Image.open(imagepath)
+
+    (width, height) = img.size
+    if width > height:
+        ratio = size / width
+    else:
+        ratio = size / height
+
+    img.thumbnail((round(width * ratio), round(height * ratio)), Image.LANCZOS)
+    img.save(savepath+ filename)
 
 def grab_lat_lon(filename):
 
@@ -40,15 +52,21 @@ def dataframe_to_geojson(df,geojsonpath):
         f.write('%s' % collection)
 
 df=pd.DataFrame(columns=['Name','Lat','Lon'])
-panoramaimage_path='D:\OneDrive - The University Of Hong Kong\Co-work\SiteVisit\TaiWoHauPhoto/panorama/'
+panoramaimage_path_collection=[
+    'D:\OneDrive - The University Of Hong Kong\Co-work\SiteVisit\TaiWoHauPhoto/panorama/',
+    'D:\OneDrive - The University Of Hong Kong\Co-work\SiteVisit/20200527_ChukYuen_LowerWongTaiSin_LokFu\panorama/',
+    ]
 #csvpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\panorama.csv'
 geojsonpath='panorama.geojson'
+panorama_savepath='PanoramaPhoto/'
+for panoramaimage_path in panoramaimage_path_collection:
 
-photolist=os.listdir(panoramaimage_path)
-for item in photolist:
-    lat,lon=grab_lat_lon(item)
-    new_row = pd.Series({'Name': item, 'Lat': lat, 'Lon': lon})
-    df = df.append(new_row, ignore_index=True)
+    photolist=os.listdir(panoramaimage_path)
+    for item in photolist:
+        make_thumbnail(panoramaimage_path, panorama_savepath, item,size=1000)
+        lat,lon=grab_lat_lon(item)
+        new_row = pd.Series({'Name': item, 'Lat': lat, 'Lon': lon})
+        df = df.append(new_row, ignore_index=True)
 print(df)
 dataframe_to_geojson(df,geojsonpath)
 
