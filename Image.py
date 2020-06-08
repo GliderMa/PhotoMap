@@ -81,11 +81,12 @@ def make_thumbnail(folderpath,savepath,filename):
     img.save(savepath+ filename)
 #df=pd.DataFrame(columns=['Name','Lat','Lon'])
 
-csvpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated.csv'
-exportpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated0601.csv'
+csvpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated0601.csv'
+exportpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated.csv'
 pathcollection=[
-    'D:\HK B\SiteVisitPlanPreparation/NorthDistrict/NorthDistrict/NorthDistrict/',
-     'D:\HK B\SiteVisitPlanPreparation\ShamshuiPo\ShamShuiPo\ShamShuiPo/',
+    'D:\HK B\SiteVisitPlanPreparation\TaiWai\TaiWai\TaiWai/',
+    'D:\HK B\SiteVisitPlanPreparation\KwaiHing\KwaiFong\KwaiFong/',
+
      # 'D:\HK B\SiteVisitPlanPreparation\ShunTinEstate\ShunTinEstate/'
                 ]
 thumbphotopath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\ThumbPhoto/'
@@ -93,11 +94,6 @@ geojsonpath='photo_updated.geojson'
 df=pd.read_csv(csvpath)
 for path in pathcollection:
     photolist=os.listdir(path)
-
-
-
-
-
 
 
     for name in photolist:

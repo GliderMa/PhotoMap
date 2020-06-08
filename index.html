@@ -49,7 +49,7 @@
                 border-radius: 5px;
                 z-index: 800;
                 width:280px;
-                height:280px ;
+                height:315px ;
 }
 .btn {
     position: fixed;
@@ -87,12 +87,21 @@
             left: 35px;}
 .LaiKok{  top: 215px;
             left: 185px;}
-.TaiHangTung{  top: 250px;
+.MeiLam{  top: 250px;
             left: 35px;}
+.ShekLei{  top: 250px;
+            left: 185px;}
+.LungHang{  top: 285px;
+            left: 35px;}
+.TaiHangTung{  top: 285px;
+            left: 185px;}       
 /*customize Leaflet style */
 .popupCustom .leaflet-popup-tip,
 .popupCustom .leaflet-popup-content-wrapper{
-    background-color: rgba(255, 255, 255, 1)
+    background-color: rgba(255, 255, 255, 1);
+    border:  1px solid rgba(255, 255, 255, 0);
+
+    
 }                  
 </style>
 
@@ -111,6 +120,9 @@
     <button class="btn ChoiYuen" onclick="zoomtopoint(ChoiYuenEstatePoint,17,map)">ChoiYuen Estate</button>
     <button class="btn KwongFuk" onclick="zoomtopoint(KwongFukEstatePoint,17,map)">KwongFuk Estate</button>
     <button class="btn LaiKok" onclick="zoomtopoint(LaiKokEstatePoint,17,map)">LaiKok Estate</button>
+    <button class="btn MeiLam" onclick="zoomtopoint(MeiLamEstatePoint,17,map)">MeiLam Estate</button>
+    <button class="btn LungHang" onclick="zoomtopoint(LungHangEstatePoint,17,map)">LungHang Estate</button>
+    <button class="btn ShekLei" onclick="zoomtopoint(ShekLeiEstatePoint,16,map)">ShekLei(I) Estate</button>
     <button class="btn TaiHangTung" onclick="zoomtopoint(TaiHangTungEstatePoint,17,map)">TaiHangTung Estate</button>
 <div id='map'></div>
 
@@ -159,6 +171,9 @@ var LokFuEstatePoint=[22.340687, 114.191012]
 var ChoiYuenEstatePoint=[22.501032, 114.125711]
 var KwongFukEstatePoint=[22.448089, 114.173833]
 var LaiKokEstatePoint=[22.332580, 114.157471]
+var ShekLeiEstatePoint=[22.360718, 114.134254]
+var MeiLamEstatePoint=[22.378423, 114.176467]
+var LungHangEstatePoint=[22.366486, 114.178850]
 var TaiHangTungEstatePoint=[22.331597, 114.170848]
 function zoomtopoint(point,zoomlevel,map){
     map.setView(point,zoomlevel)
