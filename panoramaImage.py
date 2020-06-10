@@ -55,6 +55,8 @@ df=pd.DataFrame(columns=['Name','Lat','Lon'])
 panoramaimage_path_collection=[
     'D:\OneDrive - The University Of Hong Kong\Co-work\SiteVisit\TaiWoHauPhoto/panorama/',
     'D:\OneDrive - The University Of Hong Kong\Co-work\SiteVisit/20200527_ChukYuen_LowerWongTaiSin_LokFu\panorama/',
+    'D:\OneDrive - The University Of Hong Kong\Co-work\SiteVisit/20200604_MeiLam_LungHang\Panorama/',
+    'D:\OneDrive - The University Of Hong Kong\Co-work\SiteVisit/20200605_KwaiFong_ShekLei1\Panorama/',
     ]
 #csvpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\panorama.csv'
 geojsonpath='panorama.geojson'

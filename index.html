@@ -26,7 +26,7 @@
                 margin-top: 0;
                 top: 10px;
                 left: 35px;
-                font-size: 2em;
+                font-size: 2.15em;
                 font-family: "Lora", serif;
                 letter-spacing: .04em;
                 padding: 10px 15px;
@@ -34,12 +34,13 @@
                 border: 1px solid grey;
                 border-radius: 3px;
                 z-index: 800;
+                
             }
 #background{
     position: fixed;
                 margin-top: 0;
                 top: 3px;
-                left: 25px;
+                left: 15px;
                 font-size: 2em;
                 font-family: "Lora", serif;
                 letter-spacing: .04em;
@@ -48,8 +49,8 @@
                 border: 1px solid grey;
                 border-radius: 5px;
                 z-index: 800;
-                width:280px;
-                height:315px ;
+                width:320px;
+                height:492.5px ;
 }
 .btn {
     position: fixed;
@@ -65,36 +66,60 @@
                 border: 1px solid grey;
                 border-radius: 5px;
                 z-index: 800;
-                width:140px
+                width:150px;
+               
 }
+.ApLeiChau{ top: 75px;
+            left: 35px;}
 .Butterfly {top: 75px;
+            left: 195px;}
+.CheungKwai {top: 110px;
             left: 35px;}
-.YauOi {    top: 75px;
-            left: 185px;}
-.LongPing{  top: 110px;
+.CheungShan{top:110px;
+            left: 195px;}
+.ChoiYuen{  top: 162.5px;
             left: 35px;}
-.ApLeiChau{ top: 110px;
-            left: 185px;}
-.TsuenWan{  top: 145px;
+.ChukYuenSouth{  top: 145px;
+            left: 195px;}
+.KwaiFong{  top: 197.5px;
             left: 35px;}
-.ShunTin{   top: 145px;
-            left: 185px;}
-.LokFu{     top: 180px;
+.KwongFuk{  top: 197.5px;
+            left: 195px;}
+.LaiKok{  top: 232.5px;
             left: 35px;}
-.ChoiYuen{  top: 180px;
-            left: 185px;}
-.KwongFuk{  top: 215px;
+.LokFu{     top: 232.5px;
+            left: 195px;}
+.WongTaiSin{top: 267.5px;
             left: 35px;}
-.LaiKok{  top: 215px;
-            left: 185px;}
-.MeiLam{  top: 250px;
+.LungHang{  top: 267.5px;
+            left: 195px;}
+.MeiLam{  top: 320px;
             left: 35px;}
-.ShekLei{  top: 250px;
-            left: 185px;}
-.LungHang{  top: 285px;
+
+.OnTing {    top: 302.5px;
+            left: 195px;}
+.ShekLei{  top: 355px;
             left: 35px;}
-.TaiHangTung{  top: 285px;
-            left: 185px;}       
+.ShekWaiKok{  top: 337.5px;
+            left: 195px;}
+.ShuiPinWai{  top: 390px;
+            left: 35px;}
+
+.ShunTin{   top: 390px;
+            left: 195px;}
+.TaiHangTung{  top: 425px;
+            left: 35px;} 
+.TaiWoHau{  top: 425px;
+            left: 195px;}
+.WuKing{  top: 477.5px;
+          left: 35px;}
+.YauOi  {  top: 460px;
+          left: 195px;}
+
+
+
+
+   
 /*customize Leaflet style */
 .popupCustom .leaflet-popup-tip,
 .popupCustom .leaflet-popup-content-wrapper{
@@ -110,20 +135,28 @@
     <h1 id="background"> </h1>
     <h1 id="title">Estate PhotoView</h1>
    
-    <button class="btn LongPing" onclick="zoomtopoint(LongPingEstatePoint,estate_zoomlevel,map)">LongPing Estate</button>
-    <button class="btn Butterfly" onclick="zoomtopoint(ButterflyEstatePoint,17,map)">Butterfly Estate</button>
-    <button class="btn YauOi" onclick="zoomtopoint(YauOiEstatePoint,17,map)">YauOi Estate</button>
     <button class="btn ApLeiChau" onclick="zoomtopoint(ApLeiChauEstatePoint,18,map)">ApLeiChau Estate</button>
-    <button class="btn TsuenWan" onclick="zoomtopoint(TaiWoHauEstatePoint,16,map)">TaiWoHau Estate</button>
-    <button class="btn ShunTin" onclick="zoomtopoint(ShunTinEstatePoint,17,map)">ShunTin Estate</button>
-    <button class="btn LokFu" onclick="zoomtopoint(LokFuEstatePoint,16,map)">LokFu Estate</button>
+    <button class="btn Butterfly" onclick="zoomtopoint(ButterflyEstatePoint,17,map)">Butterfly Estate</button>
+    <button class="btn CheungKwai" onclick="zoomtopoint(CheungKwaiEstatePoint,17,map)">CheungKwai Estate</button>
+    <button class="btn CheungShan" onclick="zoomtopoint(CheungShanEstatePoint,18,map)">CheungShan Estate</button>
     <button class="btn ChoiYuen" onclick="zoomtopoint(ChoiYuenEstatePoint,17,map)">ChoiYuen Estate</button>
+    <button class="btn ChukYuenSouth" onclick="zoomtopoint(ChukYuenSouthEstatePoint,17,map)">ChukYuen(South) Estate</button>
+    <button class="btn KwaiFong" onclick="zoomtopoint(KwaiFongEstatePoint,17,map)">KwaiFong Estate</button>
     <button class="btn KwongFuk" onclick="zoomtopoint(KwongFukEstatePoint,17,map)">KwongFuk Estate</button>
     <button class="btn LaiKok" onclick="zoomtopoint(LaiKokEstatePoint,17,map)">LaiKok Estate</button>
-    <button class="btn MeiLam" onclick="zoomtopoint(MeiLamEstatePoint,17,map)">MeiLam Estate</button>
+    <button class="btn LokFu" onclick="zoomtopoint(LokFuEstatePoint,17,map)">LokFu Estate</button>
+    <button class="btn WongTaiSin" onclick="zoomtopoint(WongTaiSinEstatePoint,17,map)">Lower WongTaiSin (II) Estate</button>
     <button class="btn LungHang" onclick="zoomtopoint(LungHangEstatePoint,17,map)">LungHang Estate</button>
-    <button class="btn ShekLei" onclick="zoomtopoint(ShekLeiEstatePoint,16,map)">ShekLei(I) Estate</button>
+    <button class="btn MeiLam" onclick="zoomtopoint(MeiLamEstatePoint,17,map)">MeiLam Estate</button>
+    <button class="btn OnTing" onclick="zoomtopoint(YauOiEstatePoint,17,map)">OnTing Estate</button>
+    <button class="btn ShekLei" onclick="zoomtopoint(ShekLeiEstatePoint,17,map)">ShekLei(I) Estate</button>
+    <button class="btn ShekWaiKok" onclick="zoomtopoint(ShekWaiKokEstatePoint,17,map)">ShekWaiKok Estate</button>
+    <button class="btn ShuiPinWai" onclick="zoomtopoint(ShuiPinWaiEstatePoint,18,map)">ShuiPinWai Estate</button>
+    <button class="btn ShunTin" onclick="zoomtopoint(ShunTinEstatePoint,17,map)">ShunTin Estate</button>
     <button class="btn TaiHangTung" onclick="zoomtopoint(TaiHangTungEstatePoint,17,map)">TaiHangTung Estate</button>
+    <button class="btn TaiWoHau" onclick="zoomtopoint(TaiWoHauEstatePoint,17,map)">TaiWoHau Estate</button>
+    <button class="btn WuKing" onclick="zoomtopoint(ButterflyEstatePoint,17,map)">WuKing Estate</button>
+    <button class="btn YauOi" onclick="zoomtopoint(YauOiEstatePoint,17,map)">YauOi Estate</button>
 <div id='map'></div>
 
 
@@ -161,20 +194,32 @@ var panoramaIcon=L.icon({
 })
 //zoom to function
 var estate_zoomlevel=16
-var ButterflyEstatePoint=[22.376210, 113.963798]
-var LongPingEstatePoint=[22.448580, 114.023275]
-var YauOiEstatePoint=[22.387733, 113.975869]
+
+
+
 var ApLeiChauEstatePoint=[22.244551, 114.150515]
-var TaiWoHauEstatePoint=[22.372547, 114.126945]
-var ShunTinEstatePoint=[22.325563, 114.226497]
-var LokFuEstatePoint=[22.340687, 114.191012]
+var ButterflyEstatePoint=[22.376210, 113.963798]
+var CheungKwaiEstatePoint=[1,1]
+var CheungShanEstatePoint=[22.378467, 114.130155]
 var ChoiYuenEstatePoint=[22.501032, 114.125711]
+var ChukYuenSouthEstatePoint=[22.344383, 114.192149]
+var KwaiFongEstatePoint=[22.359459, 114.129702]
 var KwongFukEstatePoint=[22.448089, 114.173833]
 var LaiKokEstatePoint=[22.332580, 114.157471]
-var ShekLeiEstatePoint=[22.360718, 114.134254]
-var MeiLamEstatePoint=[22.378423, 114.176467]
+var LokFuEstatePoint=[22.337675, 114.188075]
+var WongTaiSinEstatePoint=[22.340367, 114.193612]
 var LungHangEstatePoint=[22.366486, 114.178850]
+var MeiLamEstatePoint=[22.378423, 114.176467]
+var YauOiEstatePoint=[22.387733, 113.975869]
+var ShekLeiEstatePoint=[22.362921, 114.138640]
+var ShekWaiKokEstatePoint=[22.375187, 114.124830]
+var ShuiPinWaiEstatePoint=[22.445571, 114.020183]
+var ShunTinEstatePoint=[22.325563, 114.226497]
 var TaiHangTungEstatePoint=[22.331597, 114.170848]
+var TaiWoHauEstatePoint=[22.368235, 114.124605]
+
+
+
 function zoomtopoint(point,zoomlevel,map){
     map.setView(point,zoomlevel)
 }
