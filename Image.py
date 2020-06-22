@@ -81,12 +81,10 @@ def make_thumbnail(folderpath,savepath,filename):
     img.save(savepath+ filename)
 #df=pd.DataFrame(columns=['Name','Lat','Lon'])
 
-csvpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated0601.csv'
-exportpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated.csv'
+csvpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated.csv'
+exportpath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\photoinfo_updated0618.csv'
 pathcollection=[
-    'D:\HK B\SiteVisitPlanPreparation\TaiWai\TaiWai\TaiWai/',
-    'D:\HK B\SiteVisitPlanPreparation\KwaiHing\KwaiFong\KwaiFong/',
-
+    'D:\HK B\SiteVisitPlanPreparation\CheungChau\CheungChau\CheungChau/',
      # 'D:\HK B\SiteVisitPlanPreparation\ShunTinEstate\ShunTinEstate/'
                 ]
 thumbphotopath='D:\HK B\SiteVisitPlanPreparation\Photos\JSVisulization\ThumbPhoto/'

@@ -1,0 +1,24 @@
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GliderMa/PhotoMap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GliderMa/PhotoMap/issues"
+  },
+  "homepage": "https://github.com/GliderMa/PhotoMap#readme",
+  "dependencies": {
+    "dbgeo": "^1.1.0",
+    "express": "^4.17.1",
+    "pg-promise": "^10.5.6"
+  }
+}
